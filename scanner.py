@@ -19,7 +19,7 @@ def scan(ip):
     
     all_list = []
     for element in answered_list: 
-        user_list = {"ip": element[1].psrc, "mac": element[1].hwsrc}    # ip клиента который отправил пакет и mac клиента который отправил нам пакет в ответ. Чтобы узнать больше ответов, используй show()
+        user_list = {"ip": element[1].psrc, "mac": element[1].hwsrc}
         all_list.append(user_list)
 
     return all_list
