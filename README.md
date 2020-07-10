@@ -1,5 +1,5 @@
 # :mag:SiNetScan
-:mag:Simple network scanner
+Simple network scanner
 
 # :bulb: Installing
 `git clone https://github.com/Xttiriey/SiNetScan.git`
