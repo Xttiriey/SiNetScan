@@ -34,7 +34,7 @@ def print_result(results_list):
         for i in range(len(mac_lines)):
             if a in mac_lines[i]:
                 result = [mac_lines[i]]
-                res = result[0]
+                res = result[0].replace("\n", "")
                 device = res[res.find("|")+1:]
         pt.add_row([client["ip"], client["mac"], device])
     print(pt)
