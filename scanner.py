@@ -24,19 +24,22 @@ def scan(ip):
 
     return all_list
 
+def manufacturer(macAdd):
+    a = macAdd["mac"][0:8].replace(":", "-").upper()
+    device = ""
+    with open('MacList.txt') as f:
+        mac_lines = f.readlines()
+    for i in range(len(mac_lines)):
+        if a in mac_lines[i]:
+            result = [mac_lines[i]]
+            res = result[0].replace("\n", "")
+            device = res[res.find("|")+1:]
+    return device
+
 def print_result(results_list):
     pt.field_names = ["IP Address", "MAC Address", "Device manufacturer"]
     for client in results_list:
-        a = client["mac"][0:8].replace(":", "-").upper()
-        device = ""
-        with open('MacList.txt') as f:
-            mac_lines = f.readlines()
-        for i in range(len(mac_lines)):
-            if a in mac_lines[i]:
-                result = [mac_lines[i]]
-                res = result[0].replace("\n", "")
-                device = res[res.find("|")+1:]
-        pt.add_row([client["ip"], client["mac"], device])
+        pt.add_row([client["ip"], client["mac"], manufacturer(client)])
     print(pt)
   
 options = get_arguments()
