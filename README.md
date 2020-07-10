@@ -13,5 +13,3 @@ Simple network scanner
 `sudo python scanner.py -t 192.168.0.100/24`
 
 `-t` ip address of target
-
-![alt text](img1.png)
