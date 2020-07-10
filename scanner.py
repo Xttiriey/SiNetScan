@@ -1,6 +1,9 @@
+from prettytable import PrettyTable
 import scapy.all as scapy
 import argparse as ap
 import re
+
+pt = PrettyTable()
 
 def get_arguments():
     parser = ap.ArgumentParser()
@@ -16,15 +19,13 @@ def scan(ip):
     
     all_list = []
     for element in answered_list: 
-        user_list = {"ip": element[1].psrc, "mac": element[1].hwsrc}    
+        user_list = {"ip": element[1].psrc, "mac": element[1].hwsrc}    # ip клиента который отправил пакет и mac клиента который отправил нам пакет в ответ. Чтобы узнать больше ответов, используй show()
         all_list.append(user_list)
 
     return all_list
 
 def print_result(results_list):
-    print("———————————————————————————————————————————————————————————————————————————————————————————————————")
-    print("IP\t\t\tMAC Address\t\t\tDevice manufacturer")
-    print("---------------------------------------------------------------------------------------------------")
+    pt.field_names = ["IP Address", "MAC Address", "Device manufacturer"]
     for client in results_list:
         a = client["mac"][0:8].replace(":", "-").upper()
         device = ""
@@ -35,8 +36,8 @@ def print_result(results_list):
                 result = [mac_lines[i]]
                 res = result[0]
                 device = res[res.find("|")+1:]
-        print("\n" + client["ip"] + "\t\t" + client["mac"] + "\t\t" + device)
-        print("---------------------------------------------------------------------------------------------------")
+        pt.add_row([client["ip"], client["mac"], device])
+    print(pt)
   
 options = get_arguments()
 scan_result = scan(options.target)
