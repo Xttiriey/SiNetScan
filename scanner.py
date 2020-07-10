@@ -1,4 +1,3 @@
-import subprocess as sp
 import scapy.all as scapy
 import argparse as ap
 import re
